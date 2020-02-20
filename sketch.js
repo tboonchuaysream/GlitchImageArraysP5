@@ -10,7 +10,6 @@ var regularImg; // Declare variable 'img'.
 var inverseImg;
 var bRegular = true;
 var imageList = [];
-var img
 
 var startMillis;
 var randomWidth;
@@ -18,17 +17,22 @@ var randomHeight;
 var shape;
 
 var state;		// variable we change
-var stateOne = 1;
-var stateTwo = 2;
+var stateBurningMan = 1;
+var stateEdc = 2;
+var stateOutsideLands = 3;
+var stateTomorrowland = 4;
+var stateUltraMusic = 5;
+var stateCoachella = 6;
+var stateList = [1,2,3,4,5,6];
 
 // preload() will execture before setup()
 function preload() {
-  imageList[0] = loadImage('assets/image1.jpg');			
-  imageList[1] = loadImage('assets/image2.jpg');
-  imageList[2] = loadImage('assets/image3.jpg');
-  imageList[3] = loadImage('assets/image4.jpg');
-  imageList[4] = loadImage('assets/image5.jpg');
-  imageList[5] = loadImage('assets/image6.jpg');
+  imageList[0] = loadImage('assets/image1.jpg');	// stateOne		
+  imageList[1] = loadImage('assets/image2.jpg');	// stateTwo
+  imageList[2] = loadImage('assets/image3.jpg');	// stateThree
+  imageList[3] = loadImage('assets/image4.jpg');	// stateFour
+  imageList[4] = loadImage('assets/image5.jpg');	// stateFive
+  imageList[5] = loadImage('assets/image6.jpg');	// stateSix
 }
 
 function setup() {
@@ -36,7 +40,7 @@ function setup() {
 
 	imageMode(CENTER);
 
-  chooseNewImage();
+  chooseNewState();
   
 	createCanvas(1024, 800);
 
@@ -44,77 +48,46 @@ function setup() {
 }
 
 function draw() {
-
 	background(0);
 
-  // When timer expires, after 1000ms, choose a new random image
-  if( millis() > startMillis + 1000 ) {	
-    // Displays the image at center point
-    //image(img, width/2, height/2, random(mouseX), random(mouseY));
-    chooseNewImage();
-    startMillis = millis();
+  	// When timer expires, after 1000ms, choose a new random image
+  	if( millis() > startMillis + 1000 ) {	
+   	 chooseNewState();
+    	startMillis = millis();
 
-    //random width and height to be used later
-    randomWidth = random(1024);
-	randomHeight = random(800);
+    	//random width and height to be used later
+    	randomWidth = random(1024);
+		randomHeight = random(800);
+ 	}
 
-	//reset the key to nothing
-	key = "";
-
- }
-
- //the image will go directly to the assigned image if you press any keys from 1 to 6
- //each image is bind to a different key
- if(key == "1"){
- 	state = state
- 	img = imageList[0];
- 	image(img, width/2, height/2);
- } else if (key == "2"){
- 	img = imageList[1];
- 	image(img, width/2, height/2);
- } else if (key == "3"){
- 	img = imageList[2];
- 	image(img, width/2, height/2);
- } else if (key == "4"){
- 	img = imageList[3];
- 	image(img, width/2, height/2);
- } else if (key == "5"){
- 	img = imageList[4];
- 	image(img, width/2, height/2);
- } else if (key == "6"){
- 	img = imageList[5];
- 	image(img, width/2, height/2);
- }
-
-  // draw the image
-  image(img, width/2, height/2);
 
   //the different states for each condition, there will be different mouse pressed outcomes and random shapes
   //depending on which image is currently being displayed
-  if(img == imageList[0]){
- 		imageOne();
- 	} else if (img == imageList[1]){
- 		imageTwo();
- 	} else if (img == imageList[2]){
- 		imageThree();
- 	} else if (img == imageList[3]){
- 		imageFour();
- 	} else if (img == imageList[4]){
- 		imageFive();
- 	} else if (img == imageList[5]){
- 		imageSix();
+  	if(state == stateBurningMan){
+ 		drawBurningMan();
+	}
+ 	else if (state == stateEdc){
+ 		drawEdc();
+ 	} else if (state == stateOutsideLands){
+ 		drawOutsideLands();
+ 	} else if (state == stateTomorrowland){
+ 		drawTomorrowland();
+ 	} else if (state == stateUltraMusic){
+ 		drawUltraMusic();
+ 	} else if (state == stateCoachella){
+ 		drawCoachella();
  	}
-
 }
 
 // chooses a new items from the array, select a random
 // index 0 to length of array-1
-function chooseNewImage() {
-  img = random(imageList);
-  print(img);
+function chooseNewState() {
+  state = random(stateList);
 }
 
-function imageOne(){
+function drawBurningMan(){
+	// draw our 1st image from array
+	image(imageList[0], width/2, height/2);
 
 	//random ellipse on the screen
 	fill(224, 52, 250);
@@ -128,7 +101,9 @@ function imageOne(){
 
 }
 
-function imageTwo(){
+function drawEdc(){
+	// draw 2nd image from array
+	image(imageList[1], width/2, height/2);
 
 	//random rainbow rectangle on the screen
 	fill(random(255), random(255), random(255));
@@ -143,7 +118,9 @@ function imageTwo(){
 
 }
 
-function imageThree(){
+function drawOutsideLands(){
+	// draw 3rd image from array
+	image(imageList[2], width/2, height/2);
 
 	//random rainbow ellipse on the screen
 	fill(random(255), random(255), random(255));
@@ -158,7 +135,9 @@ function imageThree(){
 
 }
 
-function imageFour(){
+function drawTomorrowland(){
+	// draw 4th image from array
+	image(imageList[3], width/2, height/2);
 
 	//random rainbow ellipse on the screen
 	fill(random(255), random(255), random(255));
@@ -173,7 +152,9 @@ function imageFour(){
 
 }
 
-function imageFive(){
+function drawUltraMusic(){
+	// draw 5th image from array
+	image(imageList[4], width/2, height/2);
 
 	//shows Ultra Music on the screen when Ultra Music is pressed
 	if(mouseIsPressed){
@@ -184,7 +165,9 @@ function imageFive(){
 
 }
 
-function imageSix(){
+function drawCoachella(){
+	// draw 6th image from array
+	image(imageList[5], width/2, height/2);
 
 	//shows random rectangle on screen when mouse is pressed
 	if(mouseIsPressed){
@@ -192,4 +175,21 @@ function imageSix(){
 		rect(mouseX,mouseY,500,300);
 	}
 
+}
+
+//--- INTERFACE ----
+function keyPressed() {
+ if(key == "1"){
+ 	state = stateBurningMan;
+ }else if (key == "2"){
+ 	state = stateEdc;
+ } else if (key == "3"){
+ 	state = stateOutsideLands;
+ } else if (key == "4"){
+ 	state = stateTomorrowland;
+ } else if (key == "5"){
+ 	state = stateUltraMusic;
+ } else if (key == "6"){
+ 	state = stateCoachella;
+ }
 }
